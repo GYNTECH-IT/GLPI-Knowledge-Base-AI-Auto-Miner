@@ -5,6 +5,7 @@ import time
 import re
 import os
 from dotenv import load_dotenv # Importe isso
+from sshtunnel import SSHTunnelForwarder
 
 # Carrega as senhas do arquivo .env
 load_dotenv()
@@ -15,6 +16,13 @@ load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 HISTORY_FILE = os.path.join(BASE_DIR, "processed_tickets.txt")
+
+# CONFIGURAÇÃO SSH (Faltava definir isso no código)
+SSH_CONFIG = {
+    'host': os.getenv('SSH_HOST'),
+    'user': os.getenv('SSH_USER'),
+    'pass': os.getenv('SSH_PASS')
+}
 
 # BANCO DE DADOS
 DB_CONFIG = {
@@ -214,9 +222,9 @@ if __name__ == "__main__":
 
     try:
         with SSHTunnelForwarder(
-            (SSH_CONFIG['ssh_address_or_host'], 22),
-            ssh_username=SSH_CONFIG['ssh_username'],
-            ssh_password=SSH_CONFIG['ssh_password'],
+            (SSH_CONFIG['host'], 22),
+            ssh_username=SSH_CONFIG['user'],
+            ssh_password=SSH_CONFIG['pass'],
             remote_bind_address=('127.0.0.1', 3306)
         ) as server:
             

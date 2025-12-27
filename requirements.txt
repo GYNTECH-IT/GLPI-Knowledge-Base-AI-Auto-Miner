@@ -1,1 +1,4 @@
-equests, mysql-connector-python, python-dotenv
+requests
+mysql-connector-python
+python-dotenv
+sshtunnel
