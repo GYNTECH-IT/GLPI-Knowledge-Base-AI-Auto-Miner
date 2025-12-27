@@ -1,0 +1,1 @@
+equests, mysql-connector-python, python-dotenv
