@@ -2,3 +2,4 @@ requests
 mysql-connector-python
 python-dotenv
 sshtunnel
+paramiko==2.12.0
